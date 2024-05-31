@@ -1,0 +1,35 @@
+<poke-loader [isLoading]="isLoading" />
+<div class="pokemon" *ngIf="!isLoading">
+  <div class="row">
+    <div class="col-md-3 mb-2" *ngFor="let pokemon of pokemonList">
+      <div class="pok-card">
+        <div class="header">
+          <p>{{ pokemon.name }}</p>
+        </div>
+        <div class="img" (click)="playPokemonSound(pokemon.details.cries.latest)">
+          <img [src]="pokemon.details.sprites.other.showdown.front_default" class="card-img-top front" alt="front">
+          <img [src]="pokemon.details.sprites.other.showdown.back_default" class="card-img-top shiny" alt="back">
+        </div>
+        <div class="type">
+          <div *ngFor="let tp of pokemon.details.types" [ngClass]="tp.type.name">
+            <fa-icon [icon]="getIconForType(tp.type.name)"></fa-icon>
+            {{ tp.type.name }}
+          </div>
+        </div>
+        <div class="status">
+          <div class="row">
+            <div class="col-md-6 status-detail" *ngFor="let stt of pokemon.details.stats">
+              <span>{{ stt.stat.name }}</span>
+              <ngb-progressbar class="mb-3" [value]="stt.base_stat" type="dark">
+                {{ stt.base_stat }}
+              </ngb-progressbar>
+            </div>
+          </div>
+        </div>
+        <div class="abilities">
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
